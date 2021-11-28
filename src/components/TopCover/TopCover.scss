@@ -1,0 +1,29 @@
+.eqw-top-cover {
+  height: 60%;
+  background-color: theme-color('primary');
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s height;
+
+  > h1,
+  h2 {
+    margin: 0;
+    color: white;
+  }
+
+  > h1 {
+    font-size: 4rem;
+    font-family: 'Carter One', 'Dongle', cursive;
+    line-height: 0.8;
+  }
+
+  > h2 {
+    font-size: 2rem;
+    font-family: 'Birthstone', 'Single Day', cursive;
+    animation: 0.5s infinite alternate top-cover-subtitle-anim;
+  }
+}
