@@ -1,0 +1,12 @@
+$default-color-set: (
+  'primary': #ff9ff3,
+  'secondary': #f368e0,
+  'background': #f5f6fa,
+  'danger': #ee5253,
+  'success': #1dd1a1,
+  'grey': #8395a7,
+);
+
+@function theme-color($key: 'primary') {
+  @return map-get($default-color-set, $key);
+}
