@@ -11,6 +11,9 @@ module.exports = {
     filename: '[name].bundle.js',
     clean: true,
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
