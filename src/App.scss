@@ -4,12 +4,14 @@ html,
 body {
   margin: 0;
   height: 100%;
-  background-color: theme-color('background');
   font-size: 11px;
   font-family: 'Quicksand', 'Noto Sans KR', sans-serif;
   color: #2f3640;
 }
 
 #root {
+  max-width: 375px;
   height: 100%;
+  background-color: theme-color('background');
+  margin: auto;
 }
