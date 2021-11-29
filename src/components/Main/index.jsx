@@ -3,6 +3,7 @@ import './Main.scss';
 import TopCover from '../TopCover';
 import EntryStep from './Steps/Entry';
 import Guide from './Steps/Guide';
+import MakeQuiz from './Steps/MakeQuiz';
 
 const Main = () => {
   const [step, setStep] = useState('ENTRY');
@@ -11,6 +12,9 @@ const Main = () => {
       case 'ENTRY':
         return (
           <EntryStep
+            onMakeQuiz={() => {
+              setStep('MAKE_QUIZ');
+            }}
             onHowToUse={() => {
               setStep('GUIDE');
             }}
@@ -24,6 +28,14 @@ const Main = () => {
             }}
           />
         );
+      case 'MAKE_QUIZ':
+        return (
+          <MakeQuiz
+            onBack={() => {
+              setStep('ENTRY');
+            }}
+          />
+        );
       default:
         return null;
     }
@@ -31,9 +43,11 @@ const Main = () => {
   const topCover = useMemo(() => {
     switch (step) {
       case 'ENTRY':
-        return <TopCover title="Event Quiz" subtitle="❤️Jeeo" />;
+        return <TopCover title="EVENT QUIZ" subtitle="❤️Jeeo" />;
       case 'GUIDE':
         return <TopCover title="HOW TO USE" height={'40%'} />;
+      case 'MAKE_QUIZ':
+        return <TopCover title="MAKE QUIZ" height={'40%'} />;
       default:
         return null;
     }

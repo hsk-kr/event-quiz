@@ -19,7 +19,7 @@ const Guide = ({ onBack }) => {
         </li>
       </ul>
       <footer>
-        <ButtonGroup btnText={['Back']} onClick={onBack} />
+        <ButtonGroup btnText={['BACK']} onClick={onBack} />
       </footer>
     </div>
   );

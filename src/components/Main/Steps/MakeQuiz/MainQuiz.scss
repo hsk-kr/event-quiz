@@ -1,0 +1,51 @@
+.make-quiz-content {
+  height: calc(60% - 43px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 2rem;
+
+  > section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    > label {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      width: 20%;
+    }
+
+    > input {
+      width: 80%;
+    }
+  }
+
+  > article {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    > div {
+      height: 6rem;
+      margin: 4px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+
+      background-color: theme-color('secondary');
+
+      &:last-child {
+        background-color: theme-color('primary');
+      }
+    }
+  }
+
+  > footer {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
