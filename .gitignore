@@ -2,4 +2,5 @@
 node_modules
 
 # distribution
-/dist
+# It didn't comment for publishing it with github
+# /dist
