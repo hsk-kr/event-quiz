@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from 'react';
-import './MainQuiz.scss';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
+import './MakeQuiz.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { QuizContext } from '../../../../context/QuizContext';
 import InputText from '../../../InputText';
 import ButtonGroup from '../../../ButtonGroup';
 import QuizInputModal from '../../../QuizInputModal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const createEmptyQuiz = () => ({
   question: '',
@@ -15,11 +16,31 @@ const createEmptyQuiz = () => ({
 });
 
 const MakeQuiz = ({ onBack, onLast }) => {
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
   const [quizes, setQuizes] = useState([]);
   const [quizModalData, setQuizModalData] = useState({
     selectedQuizIndex: -1,
     visible: false,
   });
+  const {
+    quizes: quizesInContext,
+    quizTitle,
+    quizSubtitle,
+    setQuizes: setQuizesInContext,
+    setQuizTitle,
+    setQuizSubtitle,
+  } = useContext(QuizContext);
+
+  const handleLast = useCallback(() => {
+    if (!onLast) return;
+
+    setQuizesInContext(quizes);
+    setQuizTitle(title);
+    setQuizSubtitle(subtitle);
+
+    onLast();
+  }, [onLast, quizes, title, subtitle]);
 
   const handleModalOpen = useCallback(
     (index) => () => {
@@ -66,10 +87,18 @@ const MakeQuiz = ({ onBack, onLast }) => {
   const handleGroupButtonClick = useCallback(
     (idx) => {
       if (idx === 0 && onBack) onBack();
-      else if (idx === 1 && onLast) onLast();
+      else if (idx === 1) handleLast();
     },
-    [onBack, onLast]
+    [onBack, handleLast]
   );
+
+  const loadContext = () => {
+    setQuizes(quizesInContext);
+    setTitle(quizTitle);
+    setSubtitle(quizSubtitle);
+  };
+
+  useEffect(loadContext, []);
 
   return (
     <div className="make-quiz-content">
@@ -86,11 +115,19 @@ const MakeQuiz = ({ onBack, onLast }) => {
       />
       <section>
         <label>Title</label>
-        <InputText />
+        <InputText
+          value={title}
+          onChange={(text) => setTitle(text)}
+          maxLength={16}
+        />
       </section>
       <section>
         <label>Subtitle</label>
-        <InputText />
+        <InputText
+          value={subtitle}
+          onChange={(text) => setSubtitle(text)}
+          maxLength={16}
+        />
       </section>
       <article>
         {quizes.map((_, quizIdx) => (
