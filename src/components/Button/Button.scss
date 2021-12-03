@@ -10,4 +10,9 @@
   &.default {
     border-color: theme-color('grey');
   }
+
+  &.checked {
+    border-color: theme-color('success');
+    opacity: 0.8;
+  }
 }

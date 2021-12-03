@@ -12,11 +12,28 @@ const ButtonGroup = ({ btnText = [], onClick }) => {
 
   return (
     <div className="button-group">
-      {btnText.map((text, textIdx) => (
-        <button type="button" key={textIdx} onClick={handleClick(textIdx)}>
-          {text}
-        </button>
-      ))}
+      {btnText.map((val, textIdx) => {
+        let text = '';
+        let disabled = false;
+
+        if (typeof val === 'object') {
+          text = val.text;
+          disabled = val.disabled;
+        } else {
+          text = val;
+        }
+
+        return (
+          <button
+            type="button"
+            className={disabled ? 'disabled' : ''}
+            key={textIdx}
+            onClick={disabled ? undefined : handleClick(textIdx)}
+          >
+            {text}
+          </button>
+        );
+      })}
     </div>
   );
 };

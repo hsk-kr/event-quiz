@@ -7,6 +7,8 @@ import Guide from './Steps/Guide';
 import MakeQuiz from './Steps/MakeQuiz';
 import Last from './Steps/Last';
 import QuizEntry from './Steps/QuizEntry';
+import QuizQuestions from './Steps/QuizQuestions';
+import TheEnd from './Steps/TheEnd';
 
 const Main = () => {
   const [step, setStep] = useState('ENTRY');
@@ -76,7 +78,23 @@ const Main = () => {
         return (
           <QuizEntry
             onStart={() => {
-              setStep('QUIZ_QEUSTIONS');
+              setStep('QUIZ_QUESTIONS');
+            }}
+          />
+        );
+      case 'QUIZ_QUESTIONS':
+        return (
+          <QuizQuestions
+            onFinish={() => {
+              setStep('THE_END');
+            }}
+          />
+        );
+      case 'THE_END':
+        return (
+          <TheEnd
+            onRestart={() => {
+              setStep('QUIZ_ENTRY');
             }}
           />
         );
@@ -96,6 +114,12 @@ const Main = () => {
         return <TopCover title="LAST" subtitle="For your" height={'40%'} />;
       case 'QUIZ_ENTRY':
         return <TopCover title={quizTitle} subtitle={quizSubtitle} />;
+      case 'QUIZ_QUESTIONS':
+        return (
+          <TopCover title={quizTitle} subtitle={quizSubtitle} height={'40%'} />
+        );
+      case 'THE_END':
+        return <TopCover />;
       default:
         return null;
     }

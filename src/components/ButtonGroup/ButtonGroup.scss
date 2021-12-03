@@ -10,6 +10,10 @@
     font-family: 'Carter One', cursive;
     color: white;
     font-size: 1.2rem;
+
+    &.disabled {
+      opacity: 0.6;
+    }
   }
 
   > *:nth-child(even) {

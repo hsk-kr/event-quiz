@@ -1,17 +1,21 @@
 import React, { useMemo } from 'react';
 import './Button.scss';
 
-const Button = ({ children, onClick, color = 'default' }) => {
+const Button = ({ children, onClick, color = 'default', checked = false }) => {
   const className = useMemo(() => {
     let name = 'eqw-button ';
 
-    switch (color) {
-      default:
-        name += 'default';
+    if (checked) {
+      name += 'checked';
+    } else {
+      switch (color) {
+        default:
+          name += 'default';
+      }
     }
 
     return name;
-  }, [color]);
+  }, [color, checked]);
 
   return (
     <button type="button" className={className} onClick={onClick}>
